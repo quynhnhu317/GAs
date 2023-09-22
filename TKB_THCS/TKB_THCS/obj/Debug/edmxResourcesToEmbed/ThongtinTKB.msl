@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DbModel1StoreContainer" CdmEntityContainer="DbEntities">
+    <EntitySetMapping Name="GiaoViens">
+      <EntityTypeMapping TypeName="DbModel1.GiaoVien">
+        <MappingFragment StoreEntitySet="GiaoVien">
+          <ScalarProperty Name="IDGV" ColumnName="IDGV" />
+          <ScalarProperty Name="IDMon" ColumnName="IDMon" />
+          <ScalarProperty Name="ChuyenKhoi" ColumnName="ChuyenKhoi" />
+          <ScalarProperty Name="TenGV" ColumnName="TenGV" />
+          <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
+          <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+          <ScalarProperty Name="SoTiet" ColumnName="SoTiet" />
+          <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LopHocs">
+      <EntityTypeMapping TypeName="DbModel1.LopHoc">
+        <MappingFragment StoreEntitySet="LopHoc">
+          <ScalarProperty Name="IDLop" ColumnName="IDLop" />
+          <ScalarProperty Name="IDGV" ColumnName="IDGV" />
+          <ScalarProperty Name="IDPH" ColumnName="IDPH" />
+          <ScalarProperty Name="Nam" ColumnName="Nam" />
+          <ScalarProperty Name="Khoi" ColumnName="Khoi" />
+          <ScalarProperty Name="TenLop" ColumnName="TenLop" />
+          <ScalarProperty Name="SiSo" ColumnName="SiSo" />
+          <ScalarProperty Name="BuoiHoc" ColumnName="BuoiHoc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MonHocs">
+      <EntityTypeMapping TypeName="DbModel1.MonHoc">
+        <MappingFragment StoreEntitySet="MonHoc">
+          <ScalarProperty Name="IDMon" ColumnName="IDMon" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="Khoi6" ColumnName="Khoi6" />
+          <ScalarProperty Name="Khoi7" ColumnName="Khoi7" />
+          <ScalarProperty Name="Khoi8" ColumnName="Khoi8" />
+          <ScalarProperty Name="Khoi9" ColumnName="Khoi9" />
+          <ScalarProperty Name="SoTietK6" ColumnName="SoTietK6" />
+          <ScalarProperty Name="SoTietK7" ColumnName="SoTietK7" />
+          <ScalarProperty Name="SoTietK8" ColumnName="SoTietK8" />
+          <ScalarProperty Name="SoTietK9" ColumnName="SoTietK9" />
+          <ScalarProperty Name="SoBuoiK6" ColumnName="SoBuoiK6" />
+          <ScalarProperty Name="SoBuoiK7" ColumnName="SoBuoiK7" />
+          <ScalarProperty Name="SoBuoiK8" ColumnName="SoBuoiK8" />
+          <ScalarProperty Name="SoBuoiK9" ColumnName="SoBuoiK9" />
+          <ScalarProperty Name="Kep" ColumnName="Kep" />
+          <ScalarProperty Name="Phu" ColumnName="Phu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PhongHocs">
+      <EntityTypeMapping TypeName="DbModel1.PhongHoc">
+        <MappingFragment StoreEntitySet="PhongHoc">
+          <ScalarProperty Name="IDPH" ColumnName="IDPH" />
+          <ScalarProperty Name="TenPH" ColumnName="TenPH" />
+          <ScalarProperty Name="SucChua" ColumnName="SucChua" />
+          <ScalarProperty Name="ViTri" ColumnName="ViTri" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

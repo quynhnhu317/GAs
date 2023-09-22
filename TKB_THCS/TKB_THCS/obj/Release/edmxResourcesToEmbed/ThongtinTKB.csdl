@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DbModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="GiaoVien">
+    <Key>
+      <PropertyRef Name="IDGV" />
+    </Key>
+    <Property Name="IDGV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDMon" Type="Int32" />
+    <Property Name="ChuyenKhoi" Type="Int32" />
+    <Property Name="TenGV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="NamSinh" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="GioiTinh" Type="Boolean" />
+    <Property Name="SoTiet" Type="Int32" />
+    <Property Name="SoDT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MonHoc" Relationship="Self.FK_GiaoVien_MonHoc" FromRole="GiaoVien" ToRole="MonHoc" />
+    <NavigationProperty Name="LopHocs" Relationship="Self.FK_LopHoc_GiaoVien" FromRole="GiaoVien" ToRole="LopHoc" />
+  </EntityType>
+  <EntityType Name="LopHoc">
+    <Key>
+      <PropertyRef Name="IDLop" />
+    </Key>
+    <Property Name="IDLop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDGV" Type="Int32" />
+    <Property Name="IDPH" Type="Int32" />
+    <Property Name="Nam" Type="Int32" />
+    <Property Name="Khoi" Type="Int32" />
+    <Property Name="TenLop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SiSo" Type="Int32" />
+    <Property Name="BuoiHoc" Type="Int32" />
+    <NavigationProperty Name="GiaoVien" Relationship="Self.FK_LopHoc_GiaoVien" FromRole="LopHoc" ToRole="GiaoVien" />
+    <NavigationProperty Name="PhongHoc" Relationship="Self.FK_LopHoc_PhongHoc" FromRole="LopHoc" ToRole="PhongHoc" />
+  </EntityType>
+  <EntityType Name="MonHoc">
+    <Key>
+      <PropertyRef Name="IDMon" />
+    </Key>
+    <Property Name="IDMon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ten" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Khoi6" Type="Boolean" />
+    <Property Name="Khoi7" Type="Boolean" />
+    <Property Name="Khoi8" Type="Boolean" />
+    <Property Name="Khoi9" Type="Boolean" />
+    <Property Name="SoTietK6" Type="Int32" />
+    <Property Name="SoTietK7" Type="Int32" />
+    <Property Name="SoTietK8" Type="Int32" />
+    <Property Name="SoTietK9" Type="Int32" />
+    <Property Name="SoBuoiK6" Type="Int32" />
+    <Property Name="SoBuoiK7" Type="Int32" />
+    <Property Name="SoBuoiK8" Type="Int32" />
+    <Property Name="SoBuoiK9" Type="Int32" />
+    <Property Name="Kep" Type="Boolean" />
+    <Property Name="Phu" Type="Boolean" />
+    <NavigationProperty Name="GiaoViens" Relationship="Self.FK_GiaoVien_MonHoc" FromRole="MonHoc" ToRole="GiaoVien" />
+  </EntityType>
+  <EntityType Name="PhongHoc">
+    <Key>
+      <PropertyRef Name="IDPH" />
+    </Key>
+    <Property Name="IDPH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenPH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SucChua" Type="Int32" />
+    <Property Name="ViTri" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="LopHocs" Relationship="Self.FK_LopHoc_PhongHoc" FromRole="PhongHoc" ToRole="LopHoc" />
+  </EntityType>
+  <Association Name="FK_GiaoVien_MonHoc">
+    <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="0..1" />
+    <End Role="GiaoVien" Type="Self.GiaoVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MonHoc">
+        <PropertyRef Name="IDMon" />
+      </Principal>
+      <Dependent Role="GiaoVien">
+        <PropertyRef Name="IDMon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LopHoc_GiaoVien">
+    <End Role="GiaoVien" Type="Self.GiaoVien" Multiplicity="0..1" />
+    <End Role="LopHoc" Type="Self.LopHoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GiaoVien">
+        <PropertyRef Name="IDGV" />
+      </Principal>
+      <Dependent Role="LopHoc">
+        <PropertyRef Name="IDGV" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LopHoc_PhongHoc">
+    <End Role="PhongHoc" Type="Self.PhongHoc" Multiplicity="0..1" />
+    <End Role="LopHoc" Type="Self.LopHoc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhongHoc">
+        <PropertyRef Name="IDPH" />
+      </Principal>
+      <Dependent Role="LopHoc">
+        <PropertyRef Name="IDPH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="GiaoViens" EntityType="Self.GiaoVien" />
+    <EntitySet Name="LopHocs" EntityType="Self.LopHoc" />
+    <EntitySet Name="MonHocs" EntityType="Self.MonHoc" />
+    <EntitySet Name="PhongHocs" EntityType="Self.PhongHoc" />
+    <AssociationSet Name="FK_GiaoVien_MonHoc" Association="Self.FK_GiaoVien_MonHoc">
+      <End Role="MonHoc" EntitySet="MonHocs" />
+      <End Role="GiaoVien" EntitySet="GiaoViens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LopHoc_GiaoVien" Association="Self.FK_LopHoc_GiaoVien">
+      <End Role="GiaoVien" EntitySet="GiaoViens" />
+      <End Role="LopHoc" EntitySet="LopHocs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LopHoc_PhongHoc" Association="Self.FK_LopHoc_PhongHoc">
+      <End Role="PhongHoc" EntitySet="PhongHocs" />
+      <End Role="LopHoc" EntitySet="LopHocs" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

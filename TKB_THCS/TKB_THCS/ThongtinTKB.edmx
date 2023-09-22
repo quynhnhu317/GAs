@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GiaoVien">
+          <Key>
+            <PropertyRef Name="IDGV" />
+          </Key>
+          <Property Name="IDGV" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDMon" Type="int" />
+          <Property Name="ChuyenKhoi" Type="int" />
+          <Property Name="TenGV" Type="nvarchar" MaxLength="100" />
+          <Property Name="NamSinh" Type="nchar" MaxLength="10" />
+          <Property Name="GioiTinh" Type="bit" />
+          <Property Name="SoTiet" Type="int" />
+          <Property Name="SoDT" Type="nchar" MaxLength="20" />
+          <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="LopHoc">
+          <Key>
+            <PropertyRef Name="IDLop" />
+          </Key>
+          <Property Name="IDLop" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDGV" Type="int" />
+          <Property Name="IDPH" Type="int" />
+          <Property Name="Nam" Type="int" />
+          <Property Name="Khoi" Type="int" />
+          <Property Name="TenLop" Type="nvarchar" MaxLength="50" />
+          <Property Name="SiSo" Type="int" />
+          <Property Name="BuoiHoc" Type="int" />
+        </EntityType>
+        <EntityType Name="MonHoc">
+          <Key>
+            <PropertyRef Name="IDMon" />
+          </Key>
+          <Property Name="IDMon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ten" Type="nvarchar" MaxLength="100" />
+          <Property Name="Khoi6" Type="bit" />
+          <Property Name="Khoi7" Type="bit" />
+          <Property Name="Khoi8" Type="bit" />
+          <Property Name="Khoi9" Type="bit" />
+          <Property Name="SoTietK6" Type="int" />
+          <Property Name="SoTietK7" Type="int" />
+          <Property Name="SoTietK8" Type="int" />
+          <Property Name="SoTietK9" Type="int" />
+          <Property Name="SoBuoiK6" Type="int" />
+          <Property Name="SoBuoiK7" Type="int" />
+          <Property Name="SoBuoiK8" Type="int" />
+          <Property Name="SoBuoiK9" Type="int" />
+          <Property Name="Kep" Type="bit" />
+          <Property Name="Phu" Type="bit" />
+        </EntityType>
+        <EntityType Name="PhongHoc">
+          <Key>
+            <PropertyRef Name="IDPH" />
+          </Key>
+          <Property Name="IDPH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenPH" Type="nvarchar" MaxLength="50" />
+          <Property Name="SucChua" Type="int" />
+          <Property Name="ViTri" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_GiaoVien_MonHoc">
+          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="0..1" />
+          <End Role="GiaoVien" Type="Self.GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonHoc">
+              <PropertyRef Name="IDMon" />
+            </Principal>
+            <Dependent Role="GiaoVien">
+              <PropertyRef Name="IDMon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LopHoc_GiaoVien">
+          <End Role="GiaoVien" Type="Self.GiaoVien" Multiplicity="0..1" />
+          <End Role="LopHoc" Type="Self.LopHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiaoVien">
+              <PropertyRef Name="IDGV" />
+            </Principal>
+            <Dependent Role="LopHoc">
+              <PropertyRef Name="IDGV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LopHoc_PhongHoc">
+          <End Role="PhongHoc" Type="Self.PhongHoc" Multiplicity="0..1" />
+          <End Role="LopHoc" Type="Self.LopHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongHoc">
+              <PropertyRef Name="IDPH" />
+            </Principal>
+            <Dependent Role="LopHoc">
+              <PropertyRef Name="IDPH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbModel1StoreContainer">
+          <EntitySet Name="GiaoVien" EntityType="Self.GiaoVien" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LopHoc" EntityType="Self.LopHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonHoc" EntityType="Self.MonHoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhongHoc" EntityType="Self.PhongHoc" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GiaoVien_MonHoc" Association="Self.FK_GiaoVien_MonHoc">
+            <End Role="MonHoc" EntitySet="MonHoc" />
+            <End Role="GiaoVien" EntitySet="GiaoVien" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LopHoc_GiaoVien" Association="Self.FK_LopHoc_GiaoVien">
+            <End Role="GiaoVien" EntitySet="GiaoVien" />
+            <End Role="LopHoc" EntitySet="LopHoc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LopHoc_PhongHoc" Association="Self.FK_LopHoc_PhongHoc">
+            <End Role="PhongHoc" EntitySet="PhongHoc" />
+            <End Role="LopHoc" EntitySet="LopHoc" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="GiaoVien">
+          <Key>
+            <PropertyRef Name="IDGV" />
+          </Key>
+          <Property Name="IDGV" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDMon" Type="Int32" />
+          <Property Name="ChuyenKhoi" Type="Int32" />
+          <Property Name="TenGV" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="NamSinh" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="GioiTinh" Type="Boolean" />
+          <Property Name="SoTiet" Type="Int32" />
+          <Property Name="SoDT" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="DiaChi" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MonHoc" Relationship="Self.FK_GiaoVien_MonHoc" FromRole="GiaoVien" ToRole="MonHoc" />
+          <NavigationProperty Name="LopHocs" Relationship="Self.FK_LopHoc_GiaoVien" FromRole="GiaoVien" ToRole="LopHoc" />
+        </EntityType>
+        <EntityType Name="LopHoc">
+          <Key>
+            <PropertyRef Name="IDLop" />
+          </Key>
+          <Property Name="IDLop" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDGV" Type="Int32" />
+          <Property Name="IDPH" Type="Int32" />
+          <Property Name="Nam" Type="Int32" />
+          <Property Name="Khoi" Type="Int32" />
+          <Property Name="TenLop" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SiSo" Type="Int32" />
+          <Property Name="BuoiHoc" Type="Int32" />
+          <NavigationProperty Name="GiaoVien" Relationship="Self.FK_LopHoc_GiaoVien" FromRole="LopHoc" ToRole="GiaoVien" />
+          <NavigationProperty Name="PhongHoc" Relationship="Self.FK_LopHoc_PhongHoc" FromRole="LopHoc" ToRole="PhongHoc" />
+        </EntityType>
+        <EntityType Name="MonHoc">
+          <Key>
+            <PropertyRef Name="IDMon" />
+          </Key>
+          <Property Name="IDMon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ten" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Khoi6" Type="Boolean" />
+          <Property Name="Khoi7" Type="Boolean" />
+          <Property Name="Khoi8" Type="Boolean" />
+          <Property Name="Khoi9" Type="Boolean" />
+          <Property Name="SoTietK6" Type="Int32" />
+          <Property Name="SoTietK7" Type="Int32" />
+          <Property Name="SoTietK8" Type="Int32" />
+          <Property Name="SoTietK9" Type="Int32" />
+          <Property Name="SoBuoiK6" Type="Int32" />
+          <Property Name="SoBuoiK7" Type="Int32" />
+          <Property Name="SoBuoiK8" Type="Int32" />
+          <Property Name="SoBuoiK9" Type="Int32" />
+          <Property Name="Kep" Type="Boolean" />
+          <Property Name="Phu" Type="Boolean" />
+          <NavigationProperty Name="GiaoViens" Relationship="Self.FK_GiaoVien_MonHoc" FromRole="MonHoc" ToRole="GiaoVien" />
+        </EntityType>
+        <EntityType Name="PhongHoc">
+          <Key>
+            <PropertyRef Name="IDPH" />
+          </Key>
+          <Property Name="IDPH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenPH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SucChua" Type="Int32" />
+          <Property Name="ViTri" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LopHocs" Relationship="Self.FK_LopHoc_PhongHoc" FromRole="PhongHoc" ToRole="LopHoc" />
+        </EntityType>
+        <Association Name="FK_GiaoVien_MonHoc">
+          <End Role="MonHoc" Type="Self.MonHoc" Multiplicity="0..1" />
+          <End Role="GiaoVien" Type="Self.GiaoVien" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonHoc">
+              <PropertyRef Name="IDMon" />
+            </Principal>
+            <Dependent Role="GiaoVien">
+              <PropertyRef Name="IDMon" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LopHoc_GiaoVien">
+          <End Role="GiaoVien" Type="Self.GiaoVien" Multiplicity="0..1" />
+          <End Role="LopHoc" Type="Self.LopHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GiaoVien">
+              <PropertyRef Name="IDGV" />
+            </Principal>
+            <Dependent Role="LopHoc">
+              <PropertyRef Name="IDGV" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LopHoc_PhongHoc">
+          <End Role="PhongHoc" Type="Self.PhongHoc" Multiplicity="0..1" />
+          <End Role="LopHoc" Type="Self.LopHoc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PhongHoc">
+              <PropertyRef Name="IDPH" />
+            </Principal>
+            <Dependent Role="LopHoc">
+              <PropertyRef Name="IDPH" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="GiaoViens" EntityType="Self.GiaoVien" />
+          <EntitySet Name="LopHocs" EntityType="Self.LopHoc" />
+          <EntitySet Name="MonHocs" EntityType="Self.MonHoc" />
+          <EntitySet Name="PhongHocs" EntityType="Self.PhongHoc" />
+          <AssociationSet Name="FK_GiaoVien_MonHoc" Association="Self.FK_GiaoVien_MonHoc">
+            <End Role="MonHoc" EntitySet="MonHocs" />
+            <End Role="GiaoVien" EntitySet="GiaoViens" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LopHoc_GiaoVien" Association="Self.FK_LopHoc_GiaoVien">
+            <End Role="GiaoVien" EntitySet="GiaoViens" />
+            <End Role="LopHoc" EntitySet="LopHocs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LopHoc_PhongHoc" Association="Self.FK_LopHoc_PhongHoc">
+            <End Role="PhongHoc" EntitySet="PhongHocs" />
+            <End Role="LopHoc" EntitySet="LopHocs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbModel1StoreContainer" CdmEntityContainer="DbEntities">
+          <EntitySetMapping Name="GiaoViens">
+            <EntityTypeMapping TypeName="DbModel1.GiaoVien">
+              <MappingFragment StoreEntitySet="GiaoVien">
+                <ScalarProperty Name="IDGV" ColumnName="IDGV" />
+                <ScalarProperty Name="IDMon" ColumnName="IDMon" />
+                <ScalarProperty Name="ChuyenKhoi" ColumnName="ChuyenKhoi" />
+                <ScalarProperty Name="TenGV" ColumnName="TenGV" />
+                <ScalarProperty Name="NamSinh" ColumnName="NamSinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="SoTiet" ColumnName="SoTiet" />
+                <ScalarProperty Name="SoDT" ColumnName="SoDT" />
+                <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LopHocs">
+            <EntityTypeMapping TypeName="DbModel1.LopHoc">
+              <MappingFragment StoreEntitySet="LopHoc">
+                <ScalarProperty Name="IDLop" ColumnName="IDLop" />
+                <ScalarProperty Name="IDGV" ColumnName="IDGV" />
+                <ScalarProperty Name="IDPH" ColumnName="IDPH" />
+                <ScalarProperty Name="Nam" ColumnName="Nam" />
+                <ScalarProperty Name="Khoi" ColumnName="Khoi" />
+                <ScalarProperty Name="TenLop" ColumnName="TenLop" />
+                <ScalarProperty Name="SiSo" ColumnName="SiSo" />
+                <ScalarProperty Name="BuoiHoc" ColumnName="BuoiHoc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonHocs">
+            <EntityTypeMapping TypeName="DbModel1.MonHoc">
+              <MappingFragment StoreEntitySet="MonHoc">
+                <ScalarProperty Name="IDMon" ColumnName="IDMon" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Khoi6" ColumnName="Khoi6" />
+                <ScalarProperty Name="Khoi7" ColumnName="Khoi7" />
+                <ScalarProperty Name="Khoi8" ColumnName="Khoi8" />
+                <ScalarProperty Name="Khoi9" ColumnName="Khoi9" />
+                <ScalarProperty Name="SoTietK6" ColumnName="SoTietK6" />
+                <ScalarProperty Name="SoTietK7" ColumnName="SoTietK7" />
+                <ScalarProperty Name="SoTietK8" ColumnName="SoTietK8" />
+                <ScalarProperty Name="SoTietK9" ColumnName="SoTietK9" />
+                <ScalarProperty Name="SoBuoiK6" ColumnName="SoBuoiK6" />
+                <ScalarProperty Name="SoBuoiK7" ColumnName="SoBuoiK7" />
+                <ScalarProperty Name="SoBuoiK8" ColumnName="SoBuoiK8" />
+                <ScalarProperty Name="SoBuoiK9" ColumnName="SoBuoiK9" />
+                <ScalarProperty Name="Kep" ColumnName="Kep" />
+                <ScalarProperty Name="Phu" ColumnName="Phu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhongHocs">
+            <EntityTypeMapping TypeName="DbModel1.PhongHoc">
+              <MappingFragment StoreEntitySet="PhongHoc">
+                <ScalarProperty Name="IDPH" ColumnName="IDPH" />
+                <ScalarProperty Name="TenPH" ColumnName="TenPH" />
+                <ScalarProperty Name="SucChua" ColumnName="SucChua" />
+                <ScalarProperty Name="ViTri" ColumnName="ViTri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
